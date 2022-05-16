@@ -24,7 +24,18 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  box-shadow: 0px 0px 19px 10px rgba(0, 0, 0, 0.43);
+  transition: all .5s;
+}
+
+@media screen and (max-width: 550px) {
+  .slider__wrapper {
+    min-width: 1em;
+    max-width: 90%;
+    width: 100%;
+    max-height: 50%;
+    height: auto;
+    margin: 0 auto;
+  }
 }
 
 .slider__wrapper > input {
@@ -32,49 +43,58 @@ body {
 }
 
 .slider__inner {
-  padding-top: 2em;
+  padding-top: 1em;
   padding-bottom: 2em;
   height: inherit;
   overflow: hidden;
   width: 500%;
   height: 100%;
   display: flex;
-  background-color: gray;
+  background-color: #e3dddd;
   transition: transform .5s ease-in-out;
+}
+
+@media screen and (max-width: 550px) {
+  .slider__inner {
+    padding-top: 0;
+    padding-bottom: 0;
+    max-height: 80%;
+  }
 }
 
 .slide {
   height: inherit;
   text-align: center;
   width: 20%;
-  transform: translateX(0);
 }
 
 .slide > img {
   object-fit: contain;
   margin: 0 auto;
-  max-width: 100%;
+  width: 100%;
   height: 100%;
-  box-shadow: 0px 0px 19px 10px rgba(0, 0, 0, 0.43);
 }
 
 .slider__bottom-panel {
-  padding: 0 10%;
   width: inherit;
   height: 20%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: gray;
+  background-color: #123123;
 }
 
-.slider__controls > label {
-  cursor: pointer;
-  display: inline-block;
-  height: 1em;
-  width: 1em;
-  border-radius: 50%;
-  background: #fff;
+@media screen and (max-width: 550px) {
+  .slider__bottom-panel {
+    flex-direction: column-reverse;
+    justify-content: space-evenly;
+    height: auto;
+  }
+}
+
+.slider__controls {
+  max-width: 9em;
+  display: flex;
 }
 
 .slider__wrapper > label {
@@ -86,19 +106,67 @@ body {
 }
 
 .button {
-  height: 1em;
-  width: 1em;
-  background-color: blue;
+  height: 1.1em;
+  width: 1.1em;
+  background-color: rgb(116, 113, 113);
   border-radius: 50%;
+  transition: all .3s ease-in-out;
 }
 
-.slider__wrapper label:hover,
-#slide1:checked ~ .slider__controls label > button,
-#slide2:checked ~ .slider__controls label > button,
-#slide3:checked ~ .slider__controls label > button,
-#slide4:checked ~ .slider__controls label > button,
-#slide5:checked ~ .slider__controls label > button {
-  background: green;
+.slider__text {
+  width: 100%;
+  overflow: hidden;
+}
+
+.text__inner {
+  width: 500%;
+  display: flex;
+  transition: transform .5s ease-in-out;
+}
+
+.text {
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  width: 20%;
+  font-size: 1.5em;
+  transition: 1s;
+  color: #fff;
+}
+
+@media screen and (max-width: 550px) {
+  .text {
+    font-size: 1em;
+    padding-top: 1em;
+  }
+}
+
+label {
+  background-color: transparent;
+  height: 2.5em;
+  width: 2.5em;
+  transition: transform ease-in-out 0.3s;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+label:hover > .button {
+  background-color: rgb(174, 184, 174);
+  box-shadow: 0em 0em .5em 0.2em rgb(215, 219, 215);
+}
+
+label:active > .button {
+  background-color: #fff;
+  transform: scale(0.5);
+}
+
+#slide1:checked ~ .slider__bottom-panel > .slider__controls > label[for="slide1"] > .button,
+#slide2:checked ~ .slider__bottom-panel > .slider__controls > label[for="slide2"] > .button,
+#slide3:checked ~ .slider__bottom-panel > .slider__controls > label[for="slide3"] > .button,
+#slide4:checked ~ .slider__bottom-panel > .slider__controls > label[for="slide4"] > .button,
+#slide5:checked ~ .slider__bottom-panel > .slider__controls > label[for="slide5"] > .button {
+  transform: scale(1.2);
+  background-color: #fff;
 }
 
 #slide1:checked ~ .slider__inner {
@@ -115,4 +183,20 @@ body {
 }
 #slide5:checked ~ .slider__inner {
 	transform: translateX(-80%);
+}
+
+#slide1:checked ~ .slider__bottom-panel > .slider__text > .text__inner {
+  transform: translateX(0);
+}
+#slide2:checked ~ .slider__bottom-panel > .slider__text >  .text__inner {
+  transform: translateX(-20%);
+}
+#slide3:checked ~ .slider__bottom-panel > .slider__text >  .text__inner {
+  transform: translateX(-40%);
+}
+#slide4:checked ~ .slider__bottom-panel > .slider__text >  .text__inner {
+  transform: translateX(-60%);
+}
+#slide5:checked ~ .slider__bottom-panel > .slider__text >  .text__inner {
+  transform: translateX(-80%);
 }
